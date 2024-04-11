@@ -41,7 +41,8 @@ public class Generator {
                 //生成策略配置
                 .strategyConfig(builder -> {
                     builder
-                            .addFieldPrefix("t_")           //过滤表前缀
+                            .addTablePrefix("t_")           //过滤表前缀
+                            .addFieldPrefix("t_")           //过滤字段前缀
                             .entityBuilder()
                             .enableLombok()                 //启用lombok注解
                             .enableTableFieldAnnotation()   //为字段添加TableField注解
