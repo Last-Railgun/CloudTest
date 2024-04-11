@@ -7,6 +7,7 @@ import com.test.cloud.service.PayService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,13 @@ import java.util.List;
 public class PayController {
     @Resource
     private PayService payService;
+    @Value("${server.port}")
+    private String port;
+
+    @GetMapping("/pay/get/info")
+    public String getInfoByConsul(@Value("${cloudtest.info}") String info) {
+        return "info:" + info + ",port:" + port;
+    }
 
     @PostMapping("/pay/add")
     public ResultData<String> addPay(@RequestBody TPay tPay) {
@@ -46,4 +54,5 @@ public class PayController {
     public ResultData<List<TPay>> getPayAll() {
         return ResultData.success(payService.selectAll());
     }
+
 }

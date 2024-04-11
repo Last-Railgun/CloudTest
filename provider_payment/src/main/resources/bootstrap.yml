@@ -1,12 +1,14 @@
-server:
-  port: 7001
 spring:
   application:
-    name: consumer-order
+    name: provider_payment
   cloud:
     consul:
       host: localhost
       port: 8500
       discovery:
-        prefer-ip-address: true
         service-name: ${spring.application.name}
+      config:
+        profile-separator: '-'
+        format: yaml
+        watch:
+          wait-time: 55
