@@ -9,11 +9,12 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>mybatis_generator</module>
-        <module>provider_payment8001</module>
-        <module>consumer_order</module>
-        <module>api_commons</module>
-        <module>provider_payment8002</module>
+        <module>mybatis-generator</module>
+        <module>provider-payment8001</module>
+        <module>consumer-order-rest7001</module>
+        <module>api-commons</module>
+        <module>provider-payment8002</module>
+        <module>consumer-order-feign7002</module>
     </modules>
 
 

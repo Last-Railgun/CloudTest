@@ -1,0 +1,40 @@
+server:
+  port: 7002
+spring:
+  application:
+    name: consumer-order-feign
+  cloud:
+    #启用consul服务注册和发现
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        service-name: ${spring.application.name}
+    #设置openfeign接口调用
+    openfeign:
+      # openfeign超时设置
+      client:
+        config:
+          default:
+            connect-timeout: 5000
+            read-timeout: 5000
+      #设置openfeign启用httpclient5
+      httpclient:
+        hc5:
+          enabled: true
+      #设置openfeign的请求和响应压缩
+      compression:
+        request:
+          enabled: true
+          min-request-size: 2048
+        response:
+          enabled: true
+#设置openfeign的日志级别以及监控哪个接口
+#logging:
+#  level:
+#    com:
+#      test:
+#        cloud:
+#          apis:
+#            PayFeignApi: debug
