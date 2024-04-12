@@ -30,6 +30,11 @@ spring:
           min-request-size: 2048
         response:
           enabled: true
+      #启用断路器
+      circuitbreaker:
+        enabled: true
+        group:
+          enabled: true
 #设置openfeign的日志级别以及监控哪个接口
 #logging:
 #  level:
@@ -38,3 +43,34 @@ spring:
 #        cloud:
 #          apis:
 #            PayFeignApi: debug
+
+#断路器实现
+resilience4j:
+  timelimiter:
+    configs:
+      default:
+        timeout-duration: 10s               #默认限制远程1s,超出1s即超时且走降级
+  circuitbreaker:
+    configs:
+      default:
+        failure-rate-threshold: 50          #设置多少失败率打开断路器, 单位: %
+        slow-call-duration-threshold: 2s    #慢调用阈值,超出即为慢调用
+        slow-call-rate-threshold: 30        #慢调用百分比峰值, 高于此阈值打开断路器
+        sliding-window-type: time_based     #滑动窗口类型, count_based, time_based
+        sliding-window-size: 2              #滑动窗口大小, 使用count表示请求数, 使用time表示秒数
+        minimum-number-of-calls: 2          #断路器计算失败率所需最小样本数
+        automatic-transition-from-open-to-half-open-enabled: true   #是否从开启过渡到半开启
+        wait-duration-in-open-state: 7s     #从开启到半开启的等待时间
+        permitted-number-of-calls-in-half-open-state: 2             #半开启状态允许的最大请求数
+        record-exceptions:
+          - java.lang.Exception
+  ratelimiter:
+    configs:
+      default:
+        limit-for-period: 2           #一次刷新周期内,最大允许请求值
+        limit-refresh-period: 1s      #限流器刷新间隔
+        timeout-duration: 1           #线程等待权限的默认时间
+    #设置使用断路器的服务实例
+    instances:
+      provider-payment:
+        base-config: default  #使用上述default配置

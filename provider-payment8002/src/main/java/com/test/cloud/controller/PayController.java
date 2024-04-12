@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @RestController
@@ -61,6 +62,19 @@ public class PayController {
 //            return tPayDTO;
 //        }).forEach(tPayDTOS::add);
         return ResultData.success(payService.selectAll());
+    }
+
+    //以下为测试接口
+    @GetMapping("/pay/getcir/{id}")
+    public ResultData<String> getCir(@PathVariable("id") Integer id) throws InterruptedException {
+        if (id < 0) throw new RuntimeException("cir id 异常抛出");
+        if (id > 10) TimeUnit.SECONDS.sleep(5);
+        return ResultData.success("your cir id is " + id);
+    }
+
+    @GetMapping("/pay/getrate/{id}")
+    public ResultData<String> getRatelimit(@PathVariable("id") Integer id) throws InterruptedException {
+        return ResultData.success("you rate limit is " + id);
     }
 
 }

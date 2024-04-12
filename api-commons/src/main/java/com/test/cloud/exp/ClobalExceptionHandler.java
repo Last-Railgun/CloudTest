@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ClobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResultData<String> exception(Exception ex) {
+    public ResultData<String> exception(RuntimeException ex) {
         log.error("全局异常捕获:", ex.getMessage(), ex);
         return ResultData.fail(ReturnCode.RC500.getCode(), ex.getMessage());
     }

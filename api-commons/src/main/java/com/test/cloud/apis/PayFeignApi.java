@@ -23,4 +23,10 @@ public interface PayFeignApi {
 
     @GetMapping("/pay/get/info")
     String getInfo();
+
+    @GetMapping("/pay/getcir/{id}")
+    ResultData<String> getCir(@PathVariable("id") Integer id);
+
+    @GetMapping("/pay/getrate/{id}")
+    ResultData<String> getRatelimit(@PathVariable("id") Integer id);
 }
