@@ -7,8 +7,10 @@
     <file url="file://$PROJECT_DIR$/consumer_order/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mybatis_generator/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mybatis_generator/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/provider_payment/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/provider_payment/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider_payment8001/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider_payment8001/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider_payment8002/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider_payment8002/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>

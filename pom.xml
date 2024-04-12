@@ -10,9 +10,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>mybatis_generator</module>
-        <module>provider_payment</module>
+        <module>provider_payment8001</module>
         <module>consumer_order</module>
         <module>api_commons</module>
+        <module>provider_payment8002</module>
     </modules>
 
 
