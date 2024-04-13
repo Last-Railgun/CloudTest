@@ -14,10 +14,12 @@ spring:
       routes:
         - id: pay-routh1
           uri: lb://provider-payment
+          #          filters:
+          #            - My=userType
           #设置检测规则(断言)
           predicates:
             - Path=/pay/get/**
-            - My=ddd
+            # - My=ddd
             #- Path 检测请求路径, "/**"表示任意路径
             #- After,- Before,- Between 在某个时间节点之前,之后或两个时间节点之间开放路由
             #- Cookie 检测请求的cookie值, 键值对定义使用","
@@ -31,10 +33,10 @@ spring:
           uri: lb://provider-payment
           predicates:
             - Path=/pay/getfilter/**
-          #            - Path=/abc/{segment}               #其中{segment}表示占位符
+          #            - Path=/abc/{segment}                  #其中{segment}表示占位符
           filters:
-            #            - AddRequestParameter=comId,111     #增加请求参数
-            #            - RemoveRequestParameter=comName    #删除请求参数
-            #            - PrefixPath=/pay                   #管理地址前缀
-            #            - SetPath=/pay/{segment}            #设置地址,{segment}为浏览器占位符
-            - RedirectTo=302,https://www.baidu.com
+          #            - AddRequestParameter=comId,111        #增加请求参数
+          #            - RemoveRequestParameter=comName       #删除请求参数
+          #            - PrefixPath=/pay                      #管理地址前缀
+          #            - SetPath=/pay/{segment}               #设置地址,{segment}为浏览器占位符
+          #            - RedirectTo=302,https://www.baidu.com #设置地址重定向到某个页面
