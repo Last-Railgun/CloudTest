@@ -20,12 +20,10 @@ public class MyRoutePredicateFactory extends AbstractRoutePredicateFactory<MyRou
 
     @Override
     public Predicate<ServerWebExchange> apply(MyRoutePredicateFactory.Config config) {
-        return new Predicate<ServerWebExchange>() {
-            public boolean test(ServerWebExchange exchange) {
-                String userType = exchange.getRequest().getQueryParams().getFirst("userType");
-                if (userType == null) return false;
-                return userType.equalsIgnoreCase(config.getUserType());
-            }
+        return exchange -> {
+            String userType = exchange.getRequest().getQueryParams().getFirst("userType");
+            if (userType == null) return false;
+            return userType.equalsIgnoreCase(config.getUserType());
         };
     }
 

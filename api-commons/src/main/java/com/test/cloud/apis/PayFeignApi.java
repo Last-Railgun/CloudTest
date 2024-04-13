@@ -37,5 +37,5 @@ public interface PayFeignApi {
     ResultData<String> getMic(@PathVariable("id") Integer id);
 
     @GetMapping("/pay/getfilter")
-    public ResultData<String> getFilter(HttpServletRequest request);
+    ResultData<String> getFilter(HttpServletRequest request);
 }
