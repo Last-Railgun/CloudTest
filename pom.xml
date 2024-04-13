@@ -15,6 +15,7 @@
         <module>api-commons</module>
         <module>provider-payment8002</module>
         <module>consumer-order-feign7002</module>
+        <module>gateway9001</module>
     </modules>
 
 
@@ -22,6 +23,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <hutool.version>5.8.22</hutool.version>
         <lombok.version>1.18.26</lombok.version>
         <druid.version>1.1.20</druid.version>
@@ -31,10 +33,16 @@
         <mybatisplus.version>3.5.5</mybatisplus.version>
         <fastjson2.version>2.0.40</fastjson2.version>
         <persistence-api.version>1.0.2</persistence-api.version>
+
         <springboot.test.version>3.1.5</springboot.test.version>
         <springboot.version>3.2.0</springboot.version>
         <springcloud.version>2023.0.0</springcloud.version>
         <springcloud.alibaba.version>2022.0.0.0-RC2</springcloud.alibaba.version>
+
+        <micrometer-tracing.version>1.2.0</micrometer-tracing.version>
+        <micrometer-observation.version>1.12.0</micrometer-observation.version>
+        <feign-micrometer.version>12.5</feign-micrometer.version>
+        <zipkin-reporter-brave.version>2.17.0</zipkin-reporter-brave.version>
     </properties>
 
     <dependencyManagement>
@@ -116,6 +124,45 @@
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${springboot.test.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <!--分布式追踪:micrometer整合zipkin图形化系统-->
+            <!--micrometer-tracing-bom导入链路追踪版本中心  1-->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-tracing-bom</artifactId>
+                <version>${micrometer-tracing.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--micrometer-tracing指标追踪  2-->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-tracing</artifactId>
+                <version>${micrometer-tracing.version}</version>
+            </dependency>
+            <!--micrometer-tracing-bridge-brave适配zipkin的桥接包 3-->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-tracing-bridge-brave</artifactId>
+                <version>${micrometer-tracing.version}</version>
+            </dependency>
+            <!--micrometer-observation 4-->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-observation</artifactId>
+                <version>${micrometer-observation.version}</version>
+            </dependency>
+            <!--feign-micrometer 5-->
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-micrometer</artifactId>
+                <version>${feign-micrometer.version}</version>
+            </dependency>
+            <!--zipkin-reporter-brave 6-->
+            <dependency>
+                <groupId>io.zipkin.reporter2</groupId>
+                <artifactId>zipkin-reporter-brave</artifactId>
+                <version>${zipkin-reporter-brave.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

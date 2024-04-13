@@ -48,7 +48,6 @@ public class PayController {
     @GetMapping("/pay/get/{id}")
     public ResultData<TPay> getPay(@PathVariable("id") Integer id) throws InterruptedException {
         if (id < 0) throw new RuntimeException("id不可为负");
-//        TimeUnit.SECONDS.sleep(6);
         return ResultData.success(payService.getById(id));
     }
 
@@ -64,7 +63,7 @@ public class PayController {
         return ResultData.success(payService.selectAll());
     }
 
-    //以下为测试接口
+    //以下为测试服务熔断接口
     @GetMapping("/pay/getcir/{id}")
     public ResultData<String> getCir(@PathVariable("id") Integer id) throws InterruptedException {
         if (id < 0) throw new RuntimeException("cir id 异常抛出");
@@ -74,7 +73,18 @@ public class PayController {
 
     @GetMapping("/pay/getrate/{id}")
     public ResultData<String> getRatelimit(@PathVariable("id") Integer id) throws InterruptedException {
-        return ResultData.success("you rate limit is " + id);
+        return ResultData.success("your rate limit is " + id);
     }
 
+    //以下为测试链路追踪接口
+    @GetMapping("/pay/getmic/{id}")
+    public ResultData<String> getMic(@PathVariable("id") Integer id) {
+        return ResultData.success("your mic is " + id);
+    }
+    
+    //以下为测试网关接口
+    @GetMapping("/pay/getgate/{id}")
+    public ResultData<String> getGate(@PathVariable("id") Integer id) {
+        return ResultData.success("your gate is " + id);
+    }
 }

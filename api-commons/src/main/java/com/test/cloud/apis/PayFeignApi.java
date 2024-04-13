@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient("provider-payment")
+//@FeignClient("provider-payment")
+@FeignClient("gateway")
 public interface PayFeignApi {
     @PostMapping("/pay/add")
     ResultData<String> addPay(@RequestBody TPayDTO tPayDTO);
@@ -21,6 +22,7 @@ public interface PayFeignApi {
     @GetMapping("/pay/getall")
     ResultData<List<TPayDTO>> getAll();
 
+    //以下为测试接口
     @GetMapping("/pay/get/info")
     String getInfo();
 
@@ -29,4 +31,7 @@ public interface PayFeignApi {
 
     @GetMapping("/pay/getrate/{id}")
     ResultData<String> getRatelimit(@PathVariable("id") Integer id);
+
+    @GetMapping("/pay/getmic/{id}")
+    ResultData<String> getMic(@PathVariable("id") Integer id);
 }

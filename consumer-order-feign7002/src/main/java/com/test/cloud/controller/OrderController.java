@@ -34,6 +34,7 @@ public class OrderController {
         return payFeignApi.getAll();
     }
 
+    //以下为测试接口
     @GetMapping("/feign/pay/get/info")
     public String getInfo() {
         return payFeignApi.getInfo();
@@ -50,5 +51,10 @@ public class OrderController {
     //服务降级方法
     public ResultData<String> cirFallback(Integer id, Throwable t) {
         return ResultData.fail(ReturnCode.RC500.getCode(), "Cirfallback: 已被限速,请稍后再试");
+    }
+
+    @GetMapping("/feign/pay/getmic/{id}")
+    public ResultData<String> getMic(@PathVariable("id") Integer id) {
+        return payFeignApi.getMic(id);
     }
 }
