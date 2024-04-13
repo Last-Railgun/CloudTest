@@ -14,9 +14,18 @@ spring:
       routes:
         - id: pay-routh1
           uri: lb://provider-payment
+          #设置检测规则(断言)
           predicates:
             - Path=/pay/get/**
+            #- Path 检测请求路径, "/**"表示任意路径
             #- After,- Before,- Between 在某个时间节点之前,之后或两个时间节点之间开放路由
+            #- Cookie 检测请求的cookie值, 键值对定义使用","
+            #- Header 检测请求头值, 键值对定义使用"="
+            #- Host 检测主机地址, 如: www.baid.com
+            #- Query 检测请求参数, 参数名和值是否符合, 值可配置为正则
+            #- Remote 检测ip地址
+            #上述路由可使用CIDR表示方法, 如: 192.168.0.1/24表示192.168.0.1-192.168.0.255
+            #- Method 检测请求方法, 如: GET, POST
         - id: pay-routh2
           uri: lb://provider-payment
           predicates:
