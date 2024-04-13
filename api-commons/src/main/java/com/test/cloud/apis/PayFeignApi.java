@@ -2,6 +2,7 @@ package com.test.cloud.apis;
 
 import com.test.cloud.entities.TPayDTO;
 import com.test.cloud.resp.ResultData;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,4 +35,7 @@ public interface PayFeignApi {
 
     @GetMapping("/pay/getmic/{id}")
     ResultData<String> getMic(@PathVariable("id") Integer id);
+
+    @GetMapping("/pay/getfilter")
+    public ResultData<String> getFilter(HttpServletRequest request);
 }

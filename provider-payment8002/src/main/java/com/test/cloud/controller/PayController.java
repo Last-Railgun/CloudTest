@@ -1,10 +1,12 @@
 package com.test.cloud.controller;
 
+import cn.hutool.core.date.DateUtil;
 import com.test.cloud.entities.TPay;
 import com.test.cloud.entities.TPayDTO;
 import com.test.cloud.resp.ResultData;
 import com.test.cloud.service.PayService;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -81,10 +83,17 @@ public class PayController {
     public ResultData<String> getMic(@PathVariable("id") Integer id) {
         return ResultData.success("your mic is " + id);
     }
-    
+
     //以下为测试网关接口
     @GetMapping("/pay/getgate/{id}")
     public ResultData<String> getGate(@PathVariable("id") Integer id) {
         return ResultData.success("your gate is " + id);
+    }
+
+    @GetMapping("/pay/getfilter")
+    public ResultData<String> getFilter(HttpServletRequest request) {
+        log.info("request comId: {}", request.getParameter("comId"));
+        log.info("request comName: {}", request.getParameter("comName"));
+        return ResultData.success("your filter is " + DateUtil.now());
     }
 }
