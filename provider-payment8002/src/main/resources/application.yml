@@ -8,7 +8,7 @@ spring:
     username: root
     password: 123.com
   profiles:
-    active: dev
+    active: default
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
