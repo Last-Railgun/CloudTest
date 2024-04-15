@@ -1,4 +1,4 @@
-package com.test.cloud.common;
+package com.test.cloud.commons;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;
