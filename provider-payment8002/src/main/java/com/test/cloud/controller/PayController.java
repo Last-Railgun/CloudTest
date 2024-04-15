@@ -70,9 +70,10 @@ public class PayController {
     public ResultData<String> getCir(@PathVariable("id") Integer id) throws InterruptedException {
         if (id < 0) throw new RuntimeException("cir id 异常抛出");
         if (id > 10) TimeUnit.SECONDS.sleep(5);
+        log.info("请求进入, 时间: {}", DateUtil.format(DateUtil.date(), "mm:ss"));
         return ResultData.success("your cir id is " + id);
     }
-
+    
     @GetMapping("/pay/getrate/{id}")
     public ResultData<String> getRatelimit(@PathVariable("id") Integer id) throws InterruptedException {
         return ResultData.success("your rate limit is " + id);

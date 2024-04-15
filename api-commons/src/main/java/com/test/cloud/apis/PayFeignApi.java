@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-//@FeignClient("provider-payment")
-@FeignClient("gateway")
+@FeignClient(value = "provider-payment", fallback = PayFeignApiFallBack.class)
+//@FeignClient("gateway")
+//该注解的blockhandler, fallback方法需要保证返回类型和参数列表一致,且参数列表要多一个BlockException参数
+//上述两个注解参数可以共存, 前者处理限流, 后者处理程序内异常
+//@SentinelResource(value = "payment", blockHandlerClass = PayFeiApiFallBack.class)
 public interface PayFeignApi {
     @PostMapping("/pay/add")
     ResultData<String> addPay(@RequestBody TPayDTO tPayDTO);

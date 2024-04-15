@@ -4,7 +4,6 @@ import com.test.cloud.apis.PayFeignApi;
 import com.test.cloud.entities.TPayDTO;
 import com.test.cloud.resp.ResultData;
 import com.test.cloud.resp.ReturnCode;
-import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -42,10 +41,10 @@ public class OrderController {
 
     @GetMapping("/feign/pay/getcir/{id}")
 //    @CircuitBreaker(name = "provider-payment", fallbackMethod = "cirFallback")
-    @RateLimiter(name = "provider-payment", fallbackMethod = "cirFallback")
+//    @RateLimiter(name = "provider-payment", fallbackMethod = "cirFallback")
     public ResultData<String> getCir(@PathVariable("id") Integer id) {
 //        return payFeignApi.getCir(id);
-        return payFeignApi.getRatelimit(id);
+        return payFeignApi.getCir(id);
     }
 
     //服务降级方法
