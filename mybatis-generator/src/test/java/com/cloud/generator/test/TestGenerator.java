@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 public class TestGenerator {
     @Test
     public void test01() {
-        Generator.generator();
+        Generator.generator("seata_account");
+        System.out.println("生成完毕...");
     }
 }

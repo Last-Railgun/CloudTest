@@ -10,11 +10,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>mybatis-generator</module>
-        <module>provider-payment8001</module>
+        <module>payment-storage8001</module>
         <module>consumer-order-rest7001</module>
         <module>api-commons</module>
-        <module>provider-payment8002</module>
-        <module>consumer-order-feign7002</module>
+        <module>payment-account8002</module>
+        <module>order-feign7002</module>
         <module>gateway9001</module>
     </modules>
 

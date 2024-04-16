@@ -1,5 +1,6 @@
 package com.test.cloud.apis;
 
+import com.test.cloud.apis.fallback.PayFeignApiFallBack;
 import com.test.cloud.entities.TPayDTO;
 import com.test.cloud.resp.ResultData;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(value = "provider-payment", fallback = PayFeignApiFallBack.class)
+@FeignClient(value = "provider-account", fallback = PayFeignApiFallBack.class)
 //@FeignClient("gateway")
 //该注解的blockhandler, fallback方法需要保证返回类型和参数列表一致,且参数列表要多一个BlockException参数
 //上述两个注解参数可以共存, 前者处理限流, 后者处理程序内异常
