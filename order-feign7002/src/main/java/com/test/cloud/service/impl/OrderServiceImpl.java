@@ -11,6 +11,7 @@ import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -32,6 +33,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     //调用账户微服务
     @Resource
     private AccountFeignApi accountFeignApi;
+    @Resource
+    private RabbitTemplate rabbitTemplate;
 
     @Override
     @GlobalTransactional(name = "create-order", rollbackFor = Exception.class)
@@ -65,5 +68,22 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         }
         log.info("结束订单创建");
         return orderFromDb;
+    }
+
+    @Override
+    public Order createOrderMQ(Order order) {
+        log.info("开始新建订单");
+        order.setStatus(0);
+        Order orderFromDb = null;
+//        if (orderMapper.insert(order) > 0) {
+//            orderFromDb = orderMapper.selectById(order.getId());
+        log.info("新建订单成功,订单信息为: {}", order);
+        orderFromDb = orderMapper.selectById(9);
+        //扣减库存
+        log.info("发送扣减库存消息");
+        rabbitTemplate.convertAndSend("cloud.direct", "storage", orderFromDb);
+        log.info("发送结束");
+//        }
+        return order;
     }
 }

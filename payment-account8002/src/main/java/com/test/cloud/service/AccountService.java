@@ -13,4 +13,6 @@ import com.test.cloud.entities.Account;
  */
 public interface AccountService extends IService<Account> {
     void decrease(Long userId, Long money);
+
+    void decreaseMQ(String msg);
 }

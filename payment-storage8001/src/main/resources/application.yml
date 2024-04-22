@@ -9,6 +9,12 @@ spring:
     password: 123.com
   profiles:
     active: default
+  rabbitmq:
+    host: localhost
+    port: 5672
+    virtual-host: /study
+    username: admin
+    password: 123.com
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

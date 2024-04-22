@@ -3,6 +3,8 @@ package com.test.cloud.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.test.cloud.entities.Storage;
 
+import java.util.Map;
+
 /**
  * <p>
  * 服务类
@@ -13,4 +15,6 @@ import com.test.cloud.entities.Storage;
  */
 public interface StorageService extends IService<Storage> {
     void decrease(Long productId, Integer count);
+
+    void decreaseMQ(Map<String, Object> msg);
 }

@@ -25,6 +25,11 @@ public class OrderController {
         return ResultData.success(orderService.createOrder(order));
     }
 
+    @GetMapping("/order/mq")
+    public ResultData<Order> createMQ() {
+        return ResultData.success(orderService.createOrderMQ(new Order()));
+    }
+
     @PostMapping("/feign/pay/add")
     public ResultData<String> addOrder(@RequestBody TPayDTO tPayDTO) {
         log.info("触发feign远程调用");

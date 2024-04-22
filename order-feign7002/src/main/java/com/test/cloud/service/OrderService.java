@@ -13,4 +13,6 @@ import com.test.cloud.entities.Order;
  */
 public interface OrderService extends IService<Order> {
     Order createOrder(Order order);
+
+    Order createOrderMQ(Order order);
 }

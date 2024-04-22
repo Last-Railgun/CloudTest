@@ -1,3 +1,4 @@
 # set auto timefill configre
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.test.cloud.commons.TimeFillHandler
+    com.test.cloud.commons.TimeFillHandler,\
+    com.test.cloud.commons.MessageConfig
