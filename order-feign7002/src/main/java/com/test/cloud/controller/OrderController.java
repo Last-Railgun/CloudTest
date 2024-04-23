@@ -25,9 +25,9 @@ public class OrderController {
         return ResultData.success(orderService.createOrder(order));
     }
 
-    @GetMapping("/order/mq")
-    public ResultData<Order> createMQ() {
-        return ResultData.success(orderService.createOrderMQ(new Order()));
+    @PostMapping("/order/mq")
+    public ResultData<Order> createMQ(@RequestBody Order order) {
+        return ResultData.success(orderService.createOrderMQ(order));
     }
 
     @PostMapping("/feign/pay/add")

@@ -13,6 +13,8 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * <p>
  * 服务实现类
@@ -45,8 +47,10 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             exchange = @Exchange(name = "cloud.direct", type = ExchangeTypes.DIRECT),
             key = "account"
     ))
-    public void decreaseMQ(String msg) {
-//        accountMapper.decreaseAccount(userId, money);
+    public void decreaseMQ(Map<String, Object> msg) {
+        Long userId = Long.valueOf(String.valueOf(msg.get("userId")));
+        Long money = Long.valueOf(String.valueOf(msg.get("money")));
+        accountMapper.decreaseAccount(userId, money);
         log.info("decrease account: {}", msg);
     }
 }

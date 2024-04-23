@@ -42,7 +42,9 @@ public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> impl
             key = "storage"
     ))
     public void decreaseMQ(Map<String, Object> msg) {
-//        storageMapper.decreaseStorage(productId, count);
+        Long productId = Long.valueOf(String.valueOf(msg.get("productId")));
+        Integer count = Integer.valueOf(String.valueOf(msg.get("count")));
+        storageMapper.decreaseStorage(productId, count);
         log.info("decrease storage: {}", msg);
     }
 }

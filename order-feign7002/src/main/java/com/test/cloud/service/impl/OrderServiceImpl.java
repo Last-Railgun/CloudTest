@@ -75,15 +75,26 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         log.info("开始新建订单");
         order.setStatus(0);
         Order orderFromDb = null;
-//        if (orderMapper.insert(order) > 0) {
-//            orderFromDb = orderMapper.selectById(order.getId());
-        log.info("新建订单成功,订单信息为: {}", order);
-        orderFromDb = orderMapper.selectById(9);
-        //扣减库存
-        log.info("发送扣减库存消息");
-        rabbitTemplate.convertAndSend("cloud.direct", "storage", orderFromDb);
-        log.info("发送结束");
-//        }
-        return order;
+        if (orderMapper.insert(order) > 0) {
+            orderFromDb = orderMapper.selectById(order.getId());
+            log.info("新建订单成功,订单信息为: {}", orderFromDb);
+            //扣减库存
+            log.info("发送扣减库存消息");
+            rabbitTemplate.convertAndSend("cloud.direct", "storage", orderFromDb);
+            log.info("发送结束");
+            //扣减账户余额
+            log.info("发送扣减余额消息");
+            rabbitTemplate.convertAndSend("cloud.direct", "account", orderFromDb);
+            log.info("调用结束");
+            //修改订单状态
+            QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("id", orderFromDb.getId());
+            queryWrapper.eq("status", 0);
+            orderFromDb.setStatus(1);
+            int updResult = orderMapper.update(orderFromDb, queryWrapper);
+            log.info("修改订单状态完成");
+        }
+        log.info("结束订单创建");
+        return orderFromDb;
     }
 }
